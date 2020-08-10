@@ -1,0 +1,65 @@
+/* 16 colors, foreground and background, using Dracula theme at the moment. */
+
+.ansi-blue-fg {
+  color: #bd93f9;
+}
+
+.ansi-blue-bg {
+  background-color: #bd93f9;
+}
+
+.ansi-cyan-fg {
+  color: #8be9fd;
+}
+
+.ansi-cyan-bg {
+  background-color: #8be9fd;
+}
+
+.ansi-green-fg {
+  color: #50fa7b;
+}
+
+.ansi-green-bg {
+  background-color: #50fa7b;
+}
+
+.ansi-yellow-fg {
+  color: #f1fa8c;
+}
+
+.ansi-yellow-bg {
+  background-color: #f1fa8c;
+}
+
+.ansi-red-fg {
+  color: #ff5555;
+}
+
+.ansi-red-bg {
+  background-color: #ff5555;
+}
+
+.ansi-magenta-fg {
+  color: #ff79c6;
+}
+
+.ansi-magenta-bg {
+  background-color: #ff79c6;
+}
+
+.ansi-black-fg {
+  color: black;
+}
+
+.ansi-black-bg {
+  background-color: black;
+}
+
+.ansi-white-fg {
+  color: white;
+}
+
+.ansi-white-bg {
+  background-color: white;
+}

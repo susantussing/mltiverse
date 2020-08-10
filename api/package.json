@@ -1,0 +1,62 @@
+{
+  "name": "mtliverse-api",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "anser": "^1.4.9",
+    "apollo-server": "^2.16.0",
+    "apollo-server-express": "^2.16.0",
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "debug": "^4.1.1",
+    "dotenv-defaults": "^2.0.0",
+    "express": "^4.17.1",
+    "graphql": "^15.3.0",
+    "graphql-compose": "^7.18.1",
+    "graphql-compose-mongoose": "^7.4.1",
+    "graphql-compose-pagination": "^6.1.0",
+    "graphql-iso-date": "^3.6.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.25",
+    "morgan": "^1.10.0",
+    "subscriptions-transport-ws": "^0.9.17",
+    "telnet-stream": "^1.0.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.10.5",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "apollo-server-testing": "^2.16.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.5.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^24.9.0",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5"
+  },
+  "scripts": {
+    "dev": "nodemon --exec babel-node --require dotenv-defaults/config ./src/index.js",
+    "start": "node --require dotenv-defaults/config ./dist/index.js",
+    "transpile": "babel ./src --out-dir dist",
+    "clean": "rm -rf dist",
+    "build": "yarn clean && yarn transpile",
+    "test": "jest"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ]
+    ]
+  }
+}

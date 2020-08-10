@@ -1,0 +1,12 @@
+{
+  "name": "mltiverse",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Susan Tussing",
+  "license": "UNLICENSED",
+  "private": true,
+  "workspaces": {
+    "packages": ["frontend", "api"],
+    "nohoist": ["**/telnet-stream/**", "**/telnet-stream"]
+  }
+}

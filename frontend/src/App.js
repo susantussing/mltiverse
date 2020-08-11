@@ -10,6 +10,7 @@ import SignUp from 'pages/home/SignUp';
 import Login from 'pages/home/Login';
 import { useAuth } from 'contexts/auth';
 import Welcome from 'pages/home/Welcome';
+import NewWorld from 'pages/world/NewWorld';
 
 function App() {
   const [{ token }] = useAuth();
@@ -20,6 +21,9 @@ function App() {
           <Switch>
             <Route exact path="/">
               <Home />
+            </Route>
+            <Route path="/world/new">
+              <NewWorld />
             </Route>
             <Route path="*">
               <Redirect to="/" />

@@ -5,11 +5,11 @@ import {
   List, Avatar, ListItem, ListItemAvatar, ListItemText, CircularProgress,
 } from '@material-ui/core';
 import GameWindow from 'components/game/Game';
-import * as Icon from 'react-feather';
 import { currentWorld } from 'graphql/cache';
 import { useQuery, useLazyQuery } from '@apollo/client';
 import { WORLDS_QUERY, CURRENT_WORLD_QUERY } from 'graphql/queries';
 import SidebarLayout from 'layouts/Sidebar';
+import LinkIconButton from 'components/LinkIconButton';
 
 const styles = (theme) => ({
   drawerAvatar: {
@@ -52,7 +52,7 @@ function Home({ classes }) {
       <List>
         <ListItem button>
           <ListItemAvatar>
-            <Icon.PlusCircle size={32} />
+            <LinkIconButton icon="PlusCircle" to="/world/new" size={32} />
           </ListItemAvatar>
           <ListItemText primary="New World" />
         </ListItem>

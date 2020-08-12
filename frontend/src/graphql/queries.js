@@ -13,6 +13,8 @@ export const WORLD_QUERY = gql`
       name
       isConnected
       status
+      host
+      port
     }
   }
 `;

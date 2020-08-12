@@ -9,6 +9,7 @@ import {
 import { CURRENT_WORLD_QUERY, WORLD_QUERY } from 'graphql/queries';
 import { WORLD_MUTATION } from 'graphql/mutations';
 import { WORLD_UPDATE_SUBSCRIPTION } from 'graphql/subscriptions';
+import LinkIconButton from 'components/LinkIconButton';
 import OutputContainer from './output/OutputContainer';
 import InputContainer from './input/InputContainer';
 
@@ -85,7 +86,7 @@ const GameWindow = ({ classes }) => {
             </Typography>
           </Grid>
           <Grid item className={classes.toolbarButtons} xs>
-            <IconButton><Icon.Sliders /></IconButton>
+            <LinkIconButton to={`/world/${worldId}`} icon="Sliders" />
 
             <IconButton
               title={worldData && worldData.worldOne.isConnected ? 'Disconnect' : 'Connect'}

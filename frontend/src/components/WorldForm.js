@@ -4,31 +4,43 @@ import { Formik, Form, Field } from 'formik';
 import { Button } from '@material-ui/core';
 import { TextField } from 'formik-material-ui';
 import { useMutation } from '@apollo/client';
-import { WORLD_CREATE_MUTATION } from 'graphql/mutations';
+import { WORLD_CREATE_MUTATION, WORLD_MUTATION } from 'graphql/mutations';
 import * as Yup from 'yup';
-import { useAuth } from 'contexts/auth';
+import { useHistory } from 'react-router-dom';
 import LinkButton from './LinkButton';
 
 const WorldValidationSchema = Yup.object().shape({
   name: Yup.string().required('Required'),
   host: Yup.string().required('Required'),
-  port: Yup.number().integer('Port must be an integer').required('Required'),
+  port: Yup.number().integer('Port must be an integer')
+    .min(1000, 'Must be from 1000-9999')
+    .max(9999, 'Must be from 1000-9999')
+    .required('Required'),
 });
 
-export default function WorldForm() {
-  const [createWorld] = useMutation(WORLD_CREATE_MUTATION);
-  const [{ userId }] = useAuth();
+export default function WorldForm({ initialValues }) {
+  const history = useHistory();
+  const [saveWorld] = useMutation(initialValues._id ? WORLD_MUTATION : WORLD_CREATE_MUTATION, {
+    onCompleted: (data) => {
+      const response = data.worldCreateOne || data.worldUpdateById;
+      history.push(`/world/${response.record._id}`);
+    },
+  });
+
   return (
     <Formik
-      initialValues={{ user: userId }}
-      onSubmit={(values, { resetForm }) => {
+      initialValues={initialValues}
+      enableReinitialize
+      onSubmit={async (values) => {
         // Send world create/update mutation
-        createWorld({
+        const record = { ...values };
+        delete record.isConnected;
+        delete record.__typename;
+        await saveWorld({
           variables: {
-            record: { ...values },
+            record,
           },
         });
-        resetForm();
       }}
       validationSchema={WorldValidationSchema}
     >

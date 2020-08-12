@@ -57,6 +57,7 @@ async function login(dispatch, name, password) {
     if (response.ok) {
       dispatch({ type: 'setToken', token: responseJson.token });
       dispatch({ type: 'finishLogin', user: responseJson.user });
+      dispatch({ type: 'initializeAuth' });
     } else {
       dispatch({ type: 'failLogin', err: responseJson.message });
     }

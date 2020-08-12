@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import { Button } from '@material-ui/core';
+import { Button, withStyles } from '@material-ui/core';
 import { TextField } from 'formik-material-ui';
 import { useMutation } from '@apollo/client';
 import { WORLD_CREATE_MUTATION, WORLD_MUTATION } from 'graphql/mutations';
@@ -18,7 +18,13 @@ const WorldValidationSchema = Yup.object().shape({
     .required('Required'),
 });
 
-export default function WorldForm({ initialValues }) {
+const styles = (theme) => ({
+  button: {
+    marginTop: theme.spacing(1),
+  },
+});
+
+function WorldForm({ initialValues, classes }) {
   const history = useHistory();
   const [saveWorld] = useMutation(initialValues._id ? WORLD_MUTATION : WORLD_CREATE_MUTATION, {
     onCompleted: (data) => {
@@ -67,11 +73,22 @@ export default function WorldForm({ initialValues }) {
             label="Port"
             fullWidth
           />
-          <Button variant="contained" color="primary" fullWidth onClick={submitForm} disabled={isSubmitting}>Submit</Button>
-          <LinkButton to="/" color="secondary">Cancel</LinkButton>
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            onClick={submitForm}
+            disabled={isSubmitting}
+            className={classes.button}
+          >
+            Submit
+          </Button>
+          <LinkButton to="/" color="secondary" className={classes.button}>Cancel</LinkButton>
         </Form>
       )}
     </Formik>
 
   );
 }
+
+export default withStyles(styles)(WorldForm);

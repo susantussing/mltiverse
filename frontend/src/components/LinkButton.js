@@ -1,19 +1,11 @@
 import React from 'react';
-import { Button, withStyles } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
-const styles = (theme) => ({
-  root: {
-    margin: theme.spacing(1),
-  },
-});
-
-function LinkButton({
-  to, children, classes, color = 'default',
+export default function LinkButton({
+  to, children, color = 'default', className,
 }) {
   return (
-    <Button variant="contained" fullWidth component={Link} to={to} className={classes.root} color={color}>{children}</Button>
+    <Button className={className} variant="contained" fullWidth component={Link} to={to} color={color}>{children}</Button>
   );
 }
-
-export default withStyles(styles)(LinkButton);

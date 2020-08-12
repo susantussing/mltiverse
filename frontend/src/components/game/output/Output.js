@@ -32,6 +32,12 @@ const styles = (theme) => ({
     borderLeft: '1px solid',
     borderColor: theme.palette.secondary.light,
   },
+  system: {
+    color: theme.palette.info.main,
+    borderWidth: '1px 0',
+    borderStyle: 'solid',
+    borderColor: theme.palette.info.main,
+  },
 });
 
 function Output({

@@ -47,13 +47,6 @@ const styles = (theme) => ({
       textAlign: 'right',
     },
   },
-  system: {
-    color: theme.palette.info.main,
-    borderWidth: '1px 0',
-    borderStyle: 'solid',
-    borderColor: theme.palette.info.main,
-  },
-
 });
 
 const GameWindow = ({ classes }) => {

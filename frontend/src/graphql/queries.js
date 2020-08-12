@@ -12,6 +12,7 @@ export const WORLD_QUERY = gql`
       _id
       name
       isConnected
+      status
     }
   }
 `;

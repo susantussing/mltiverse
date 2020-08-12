@@ -22,3 +22,14 @@ export const WORLD_MUTATION = gql`
     }
   }
 `;
+
+export const WORLD_CREATE_MUTATION = gql`
+  mutation SendWorldCreate ($record: CreateOneWorldInput!) {
+    worldCreateOne(record: $record) {
+      record {
+        _id
+        name
+      }
+    }
+  }
+`;

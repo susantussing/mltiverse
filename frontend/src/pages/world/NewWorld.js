@@ -1,7 +1,13 @@
 import React from 'react';
+import SidebarLayout from 'layouts/Sidebar';
+import WorldForm from 'components/WorldForm';
 
 function NewWorld() {
-  return <div />;
+  return (
+    <SidebarLayout title="New World">
+      <WorldForm />
+    </SidebarLayout>
+  );
 }
 
 export default NewWorld;

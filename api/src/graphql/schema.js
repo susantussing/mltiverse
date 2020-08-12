@@ -22,6 +22,13 @@ schemaComposer.Mutation.addFields({
 
 const WorldTC = composeWithMongoose(World, {});
 
+WorldTC.extendField(
+  'port', { type: 'Int' },
+);
+WorldTC.extendField(
+  'unread', { type: 'Int' },
+);
+
 WorldTC.addFields({
   isConnected: 'Boolean',
 });

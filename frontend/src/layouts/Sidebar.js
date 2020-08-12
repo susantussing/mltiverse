@@ -102,6 +102,8 @@ function SidebarLayout({
     setDrawerOpen(!drawerOpen);
   }
 
+  const SidebarComponent = Sidebar || (() => <div />);
+
   return (
     <div className={classes.root}>
       <AppBar position="absolute" className={clsx(classes.appBar, drawerOpen && classes.appBarShift)}>
@@ -139,7 +141,7 @@ function SidebarLayout({
           </IconButton>
         </div>
         <Divider />
-        <Sidebar />
+        <SidebarComponent />
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />

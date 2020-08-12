@@ -9,9 +9,18 @@ const worldSchema = new Schema({
     ref: 'User',
     required: true,
   },
-  name: String,
-  host: String,
-  port: Number,
+  name: {
+    type: String,
+    required: true,
+  },
+  host: {
+    type: String,
+    required: true,
+  },
+  port: {
+    type: Number,
+    required: true,
+  },
   status: {
     type: String,
     enum: ['connected', 'disconnected', 'connecting', 'disconnecting'],

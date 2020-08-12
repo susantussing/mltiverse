@@ -5,6 +5,9 @@ const AuthDispatchContext = React.createContext();
 
 function authReducer(state, action) {
   switch (action.type) {
+    case 'initializeAuth': {
+      return { ...state, initialized: true };
+    }
     case 'setToken': {
       return { ...state, token: action.token };
     }
@@ -74,6 +77,7 @@ async function refresh(dispatch) {
       dispatch({ type: 'setToken', token });
       dispatch({ type: 'setUserId', userId: user._id });
     }
+    dispatch({ type: 'initializeAuth' });
   } catch (err) {
     console.error(err);
   }
@@ -107,6 +111,7 @@ function AuthProvider({ children }) {
   const initialState = {
     token: null,
     userId: null,
+    initialized: false,
   };
   const [state, dispatch] = React.useReducer(authReducer, initialState);
   useEffect(() => {

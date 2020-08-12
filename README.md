@@ -4,4 +4,6 @@ This is a very, very rough initial version of a side project with zero prospects
 
 What it is *eventually* going to be is a mobile-friendly web-based client for telnet text games.  Yes, I am aware that telnet is terrible, but most of these games are still running servers that were primarily built in the 1990s.
 
+M*ltiverse is being built with React, Express, Apollo, Material UI, and a lot of apologies to my future self.
+
 ![Screenshot](mltiverse20200810.png)

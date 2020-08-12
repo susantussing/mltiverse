@@ -3,6 +3,7 @@ import { useAuth } from 'contexts/auth';
 import {
   withStyles, Divider, Badge,
   List, Avatar, ListItem, ListItemAvatar, ListItemText, CircularProgress,
+  ListItemIcon,
 } from '@material-ui/core';
 import GameWindow from 'components/game/Game';
 import { currentWorld } from 'graphql/cache';
@@ -51,9 +52,9 @@ function Home({ classes }) {
     <>
       <List>
         <ListItem button>
-          <ListItemAvatar>
-            <LinkIconButton icon="PlusCircle" to="/world/new" size={32} />
-          </ListItemAvatar>
+          <ListItemIcon>
+            <LinkIconButton icon="PlusCircle" to="/world/new" size={32} edge="start" />
+          </ListItemIcon>
           <ListItemText primary="New World" />
         </ListItem>
       </List>

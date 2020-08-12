@@ -82,12 +82,6 @@ const styles = (theme) => ({
   fixedHeight: {
     height: 240,
   },
-  drawerAvatar: {
-    height: 32,
-    width: 32,
-    fontSize: '0.85rem',
-    backgroundColor: theme.palette.primary.main,
-  },
 });
 
 function SidebarLayout({

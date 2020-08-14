@@ -5,6 +5,7 @@ import {
 import * as Icon from 'react-feather';
 import clsx from 'clsx';
 import { useAuth, logout } from 'contexts/auth';
+import { useApolloClient } from '@apollo/client';
 
 const drawerWidth = 240;
 
@@ -87,9 +88,10 @@ const styles = (theme) => ({
 function SidebarLayout({
   children, title, Sidebar, classes,
 }) {
+  const apolloClient = useApolloClient();
   const [{ token }, authDispatch] = useAuth();
   function handleLogout() {
-    logout(authDispatch, token);
+    logout(authDispatch, { token, apolloClient });
   }
   const [drawerOpen, setDrawerOpen] = useState(false);
   function handleDrawerToggle() {

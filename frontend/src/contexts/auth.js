@@ -18,7 +18,7 @@ function authReducer(state, action) {
       return { ...state, loggingIn: true };
     }
     case 'finishLogin': {
-      return { ...state, loggingIn: false, user: action.user };
+      return { ...state, loggingIn: false, userId: action.user._id };
     }
     case 'failLogin': {
       console.error(action.err);
@@ -28,7 +28,9 @@ function authReducer(state, action) {
       return { ...state, loggingOut: true };
     }
     case 'finishLogout': {
-      return { ...state, loggingOut: false, user: null };
+      return {
+        ...state, loggingOut: false, userId: null, token: null,
+      };
     }
     case 'failLogout': {
       console.error(action.err);
@@ -84,7 +86,7 @@ async function refresh(dispatch) {
   }
 }
 
-async function logout(dispatch, token) {
+async function logout(dispatch, { token, apolloClient }) {
   dispatch({ type: 'startLogout' });
   try {
     const response = await fetch('http://localhost:5000/logout', {
@@ -97,8 +99,7 @@ async function logout(dispatch, token) {
     });
     const responseJson = await response.json();
     if (response.ok) {
-      dispatch({ type: 'setToken', token: null });
-      dispatch({ type: 'setUserId', userId: null });
+      apolloClient.clearStore();
       dispatch({ type: 'finishLogout' });
     } else {
       dispatch({ type: 'failLogout', err: responseJson.message });

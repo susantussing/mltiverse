@@ -24,6 +24,7 @@ export const WORLDS_QUERY = gql`
     worldMany(filter: $filter) {
       _id
       name
+      unread
     }
   }
 `;

@@ -69,8 +69,10 @@ schemaComposer.Subscription.addFields({
     args: {
       worldId: 'MongoID!',
     },
-    subscribe: withFilter(() => pubSub.asyncIterator(LINE_CREATED),
-      (payload, variables) => payload.lineCreated.world._id.toString() === variables.worldId),
+    subscribe: withFilter(
+      () => pubSub.asyncIterator(LINE_CREATED),
+      (payload, variables) => payload.lineCreated.world._id.toString() === variables.worldId,
+    ),
 
   },
   worldUpdate: {
@@ -86,6 +88,19 @@ schemaComposer.Subscription.addFields({
       userId: 'MongoID!',
     },
     subscribe: () => pubSub.asyncIterator(USER_UPDATED),
+  },
+  userWorldUpdate: {
+    type: 'World',
+    args: {
+      userId: 'MongoID!',
+    },
+    subscribe: withFilter(
+      () => pubSub.asyncIterator(WORLD_UPDATED),
+      (payload, variables) => {
+        console.log(payload.worldUpdate.user);
+        return payload.worldUpdate.user === variables.userId;
+      },
+    ),
   },
 });
 

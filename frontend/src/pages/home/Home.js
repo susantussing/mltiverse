@@ -7,10 +7,11 @@ import {
 } from '@material-ui/core';
 import GameWindow from 'components/game/Game';
 import { currentWorld } from 'graphql/cache';
-import { useQuery, useLazyQuery } from '@apollo/client';
+import { useQuery, useLazyQuery, useMutation } from '@apollo/client';
 import { WORLDS_QUERY, CURRENT_WORLD_QUERY } from 'graphql/queries';
 import SidebarLayout from 'layouts/Sidebar';
 import LinkIconButton from 'components/LinkIconButton';
+import { WORLD_MUTATION } from 'graphql/mutations';
 
 const styles = (theme) => ({
   drawerAvatar: {
@@ -23,11 +24,22 @@ const styles = (theme) => ({
 
 function Home({ classes }) {
   const [{ userId }] = useAuth();
+  const [visible, setVisible] = useState(!document.hidden);
+
+  useEffect(() => {
+    const handleVisibility = () => { setVisible(!document.hidden); };
+    window.addEventListener('visibilitychange', handleVisibility);
+    return () => {
+      window.removeEventListener('visibilitychange', handleVisibility);
+    };
+  }, []);
+
   const [getWorlds, { data: worldsData }] = useLazyQuery(
     WORLDS_QUERY,
     { variables: { filter: { user: userId } } },
   );
   const { data: { currentWorld: currentWorldId } } = useQuery(CURRENT_WORLD_QUERY);
+  const [updateWorld] = useMutation(WORLD_MUTATION);
 
   const [worldList, setWorldList] = useState([]);
 
@@ -48,6 +60,19 @@ function Home({ classes }) {
     }
   }, [worldsData]);
 
+  useEffect(() => {
+    if (visible && currentWorldId) {
+      updateWorld({
+        variables: {
+          record: {
+            _id: currentWorldId,
+            unread: 0,
+          },
+        },
+      });
+    }
+  }, [visible, currentWorldId, updateWorld]);
+
   const Sidebar = () => (
     <>
       <List>
@@ -63,7 +88,7 @@ function Home({ classes }) {
         {worldList.map((world) => (
           <ListItem key={world._id} button onClick={() => handleChangeWorld(world._id)}>
             <ListItemAvatar>
-              <Badge color="secondary" variant="dot" badgeContent=" " overlap="circle">
+              <Badge color="secondary" badgeContent={world.unread}>
                 <Avatar className={classes.drawerAvatar}>{world.name[0]}</Avatar>
               </Badge>
             </ListItemAvatar>

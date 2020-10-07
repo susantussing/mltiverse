@@ -73,8 +73,7 @@ const GameWindow = ({ classes }) => {
     return () => {
       unsubscribe.current();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [called, worldId]);
+  }, [called, subscribeToMore, worldId]);
 
   return (
     <Container>

@@ -59,21 +59,10 @@ worldSchema.pre('save', async function () {
     }
   }
 
-  // if (this.isModified('current')) {
-  //   if (this.current) {
-  //     // mark others not current - temporary
-  //     // eventually this will go away when there's a user document to store this info on
-  //     await this.constructor.updateMany({ current: true }, { current: false });
-  //     this.unread = 0;
-  //   }
-
-  //   // pubSub.publish(WORLD_UPDATED, { worldUpdate: this })
-  // }
-
-  // if (this.isModified('unread')) {
-  //   // If the unread changes at any time other than open/close, update the UI.
-  //   pubSub.publish(WORLD_UPDATED, { worldUpdate: this });
-  // }
+  if (this.isModified('unread')) {
+    // If the unread changes at any time other than open/close, update the UI.
+    pubSub.publish(WORLD_UPDATED, { worldUpdate: this });
+  }
 });
 
 const World = mongoose.model('World', worldSchema);

@@ -26,7 +26,6 @@ function ScrollableFeed({
     if (!pauseScroll || atBottom) {
       bottomRef.current.scrollIntoView();
     }
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [children, pauseScroll]);
 

@@ -27,8 +27,7 @@ export default function OutputContainer() {
     return () => {
       unsubscribe.current();
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [worldId, called]);
+  }, [worldId, called, subscribeToMore]);
 
   return (
     <Output

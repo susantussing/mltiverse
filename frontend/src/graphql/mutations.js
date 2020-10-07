@@ -18,6 +18,7 @@ export const WORLD_MUTATION = gql`
         _id
         status
         isConnected
+        unread
       }
     }
   }

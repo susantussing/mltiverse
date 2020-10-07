@@ -33,13 +33,10 @@ historyLineSchema.post('save', async function () {
   await this.populate('world').execPopulate();
 
   if (this.wasNew) {
-    // If this is the user's active tab, send the output.  Otherwise, update the unread count.
-    // if (this.world.current) {
+    // Update unread count and publish line.
     pubSub.publish(LINE_CREATED, { lineCreated: this });
-    // } else {
-    // this.world.unread += 1;
-    // await this.world.save();
-    // }
+    this.world.unread += 1;
+    await this.world.save();
   }
 });
 

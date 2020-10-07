@@ -20,3 +20,13 @@ export const WORLD_UPDATE_SUBSCRIPTION = gql`
     }
   }
 `;
+
+export const WORLDS_UPDATE_SUBSCRIPTION = gql`
+  subscription SubscribeToWorlds ($userId: MongoID!) {
+    userWorldUpdate(userId: $worldId) {
+      _id
+      name
+      unread
+    }
+  }
+`;
